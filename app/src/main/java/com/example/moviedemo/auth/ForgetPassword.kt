@@ -1,15 +1,12 @@
 package com.example.moviedemo.auth
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.text.TextUtils
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.moviedemo.R
 import com.example.moviedemo.databinding.ActivityForgetPaswordBinding
 
-class ForgetPasword : AppCompatActivity() {
+class ForgetPassword : AppCompatActivity() {
     private lateinit var binding: ActivityForgetPaswordBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,8 +14,15 @@ class ForgetPasword : AppCompatActivity() {
         binding = ActivityForgetPaswordBinding.inflate(layoutInflater)
 
         binding.btnForget.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            var email = binding.etForgetPassword.text.toString()
+            if(TextUtils.isEmpty(email)){
+                binding.etForgetPassword.error = "Email is required"
+                binding.etForgetPassword.requestFocus()
+            }else{
+                Log.e("ForgetPassword", "Email: $email")
+            }
         }
+
 
         setContentView(binding.root)
 

@@ -2,11 +2,9 @@ package com.example.moviedemo.auth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.text.TextUtils
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.moviedemo.R
 import com.example.moviedemo.databinding.ActivityLoginBinding
 
 class Login : AppCompatActivity() {
@@ -24,7 +22,24 @@ class Login : AppCompatActivity() {
         }
 
         binding.lbForget.setOnClickListener {
-            startActivity(Intent(this, ForgetPasword::class.java))
+            startActivity(Intent(this, ForgetPassword::class.java))
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            var email = binding.etEmail.text.toString()
+            var password = binding.etPassword.text.toString()
+
+            if(TextUtils.isEmpty(email)){
+                binding.etEmail.error = "Email is required"
+                binding.etEmail.requestFocus()
+            }else if(TextUtils.isEmpty(password)){
+                binding.etPassword.error = "Password is required"
+                binding.etPassword.requestFocus()
+            }else{
+                Log.e("Login", "Email: $email, Password: $password")
+            }
+
+
         }
 
         setContentView(binding.root)
